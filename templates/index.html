@@ -1,0 +1,26 @@
+{% extends './base.html'%}
+
+{% block title %}
+<title> Home page - TODO PY</title>
+{% endblock %}
+
+{% block body %}
+<h1>Welcome to Todo Py, your task manager built with Python.</h1>
+<hr>
+<form action="/task" method="post">
+	<div class="form-group">
+		<label for=""></label>
+		<input type="text" class="form-control" name="task">
+	</div>
+	<button class="submit">Save new task</button>
+</form>
+
+<br>
+<h2> Tasks </h2>
+<hr>
+<ul>
+	{% for task in t %}
+	<li> {{ task }} - <a href="/deletetask/{{ task }}">Remove</a> </li>
+	{% endfor %}
+</ul>
+{% endblock %}
