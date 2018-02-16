@@ -10,7 +10,7 @@
 <form action="/task" method="post">
 	<div class="form-group">
 		<label for=""></label>
-		<input type="text" class="form-control" name="task">
+		<input type="text" class="form-control" name="task" required>
 	</div>
 	<button class="submit">Save new task</button>
 </form>
@@ -20,7 +20,12 @@
 <hr>
 <ul>
 	{% for task in t %}
-	<li> {{ task }} - <a href="/deletetask/{{ task }}">Remove</a> </li>
+	<li> 
+		{{ task.task }} - 
+		<a href="/complete/{{ task.id }}">Complete</a> |
+		<a href="/deletetask/{{ task.id }}">Remove</a> |
+		<a href="/updatetask/{{ task.id }}">Update</a>
+	</li>
 	{% endfor %}
 </ul>
 {% endblock %}
