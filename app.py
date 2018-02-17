@@ -43,13 +43,24 @@ def getTask(id):
 	return id
 
 # Update a task
-@app.route('/updatetask/<id>', methods=['GET', 'POST'])
-def updateTask(id):
-	if request.method == 'POST':
-		return redirect('/', 302)
+@app.route('/updatetask/<taskID>', methods=['GET'])
+def updateTask(taskID):
+	displayTask = ""
+	# Iterate the list to find the right task
+	for theTask in allTasks:
+		if int(taskID) == int(theTask['id']):
+			displayTask = theTask
 
-	if request.method == 'GET':
-		return render_template('update.html', taskname = id)
+	return render_template('update.html', task = displayTask)
+
+@app.route('/do_updatetask', methods=['POST'])
+def do_updatetask():
+	if request.method == 'POST':
+		taskID = request.form['taskID']
+		for theTask in allTasks:
+			if int(taskID) == int(theTask['id']):
+				theTask['task'] =  request.form['task']
+		return redirect('/', 302)
 
 # Delete a task
 @app.route('/deletetask/<taskID>', methods=['GET'])
