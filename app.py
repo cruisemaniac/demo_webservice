@@ -74,5 +74,27 @@ def deleteTask(taskID):
 	# redirect to homepage
 	return redirect('/', 302)
 
+@app.route('/complete/<taskID>')
+def complete(taskID):
+
+	# Iterate to find that requested task
+	for theTask in allTasks:
+		if int(taskID) == int(theTask['id']):
+			theTask['complete'] = True
+
+	# Redirect to the homepage
+	return redirect('/', 302)
+
+@app.route('/uncomplete/<taskID>')
+def uncomplete(taskID):
+
+	# Iterate to find that requested task
+	for theTask in allTasks:
+		if int(taskID) == int(theTask['id']):
+			theTask['complete'] = False
+
+	# Redirect to the homepage
+	return redirect('/', 302)
+
 if __name__ == '__main__':
 	app.run(debug=True)
