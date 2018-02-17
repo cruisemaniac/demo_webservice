@@ -20,12 +20,22 @@
 <hr>
 <ul>
 	{% for task in t %}
-	<li> 
-		{{ task.task }} - 
-		<a href="/complete/{{ task.id }}">Complete</a> |
-		<a href="/deletetask/{{ task.id }}">Remove</a> |
-		<a href="/updatetask/{{ task.id }}">Update</a>
-	</li>
+		<li>
+			{% if task.complete == True %}
+			<span style="text-decoration: line-through">
+			{% else %}
+			<span>
+			{% endif %}
+			{{ task.task }} - 
+			</span>
+			{% if task.complete == True %}
+			<a href="/uncomplete/{{ task.id }}">Uncomplete</a> |
+			{% else %}
+			<a href="/complete/{{ task.id }}">Complete</a> |
+			{% endif %}
+			<a href="/deletetask/{{ task.id }}">Remove</a> |
+			<a href="/updatetask/{{ task.id }}">Update</a>
+		</li>
 	{% endfor %}
 </ul>
 {% endblock %}
