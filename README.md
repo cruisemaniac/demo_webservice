@@ -10,7 +10,8 @@ PS: This project was built for studying purposes only.
 - [X] Read tasks
 - [X] Delete tasks
 - [X] Update tasks
-- [ ] Check task as complete
+- [X] Check task as complete
+- [X] Check task as uncomplete
 
 # License
 
