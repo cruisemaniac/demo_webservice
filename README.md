@@ -9,7 +9,7 @@ PS: This project was built for studying purposes only.
 - [X] Create tasks
 - [X] Read tasks
 - [X] Delete tasks
-- [ ] Update tasks
+- [X] Update tasks
 - [ ] Check task as complete
 
 # License
