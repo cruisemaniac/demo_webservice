@@ -1,9 +1,7 @@
 # app.py
 
 # Import packages / modules
-from flask import Flask
-from flask import render_template
-from flask import request, redirect
+from flask import Flask, render_template, request, redirect
 from datetime import datetime
 import math
 
