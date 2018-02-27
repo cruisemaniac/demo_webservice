@@ -2,17 +2,34 @@
 
 # Import packages / modules
 from flask import Flask, render_template, request, redirect
+from flask_sqlalchemy import SQLAlchemy 
 from datetime import datetime
 import math
 
 # Init flask
 app = Flask(__name__)
 
-# COnfigs
+# Configs
 app.config['TEMPLATES_AUTO_RELOAD'] = True
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:tosh@localhost/todo-py'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+
+# Init SQLAlchemy
+db = SQLAlchemy(app)
+
+
+# Models
+class Task(db.Model):
+	__tablename__ = 'tasks'
+	idTask = db.Column('idTask', db.Integer, primary_key = True)
+	task = db.Column('task', db.String)
+	status = db.Column('status', db.String, default = 'uncomplete')
+	creation_date = db.Column('creation_date', db.DateTime, default = datetime.utcnow())
+
+	def __init__(self, task):
+		self.task = task
 
 # Routes
-
 allTasks = []
 
 # Generate a random integer based on current time in UTC format
@@ -27,12 +44,9 @@ def index():
 # Create a new task
 @app.route('/task', methods=['POST'])
 def tasks():
-	new_task = {
-		'id': IDgenerator(),
-		'task': request.form['task'],
-		'complete': False
-	}
-	allTasks.append(new_task)
+	new_task = Task(request.form['task'])
+	db.session.add(new_task)
+	db.session.commit()
 	return redirect('/', 302)
 	
 # Read a specific task
