@@ -57,22 +57,17 @@ def getTask(id):
 # Update a task
 @app.route('/updatetask/<taskID>', methods=['GET'])
 def updateTask(taskID):
-	displayTask = ""
-	# Iterate the list to find the right task
-	for theTask in allTasks:
-		if int(taskID) == int(theTask['id']):
-			displayTask = theTask
+	the_task = Task.query.filter_by(idTask = taskID).first()
 
-	return render_template('update.html', task = displayTask)
+	return render_template('update.html', task = the_task)
 
 @app.route('/do_updatetask', methods=['POST'])
 def do_updatetask():
-	if request.method == 'POST':
-		taskID = request.form['taskID']
-		for theTask in allTasks:
-			if int(taskID) == int(theTask['id']):
-				theTask['task'] =  request.form['task']
-		return redirect('/', 302)
+	update_task = Task.query.filter_by(idTask = request.form['taskID']).first()
+	update_task.task = request.form['task']
+	db.session.commit()
+
+	return redirect('/', 302)
 
 # Delete a task
 @app.route('/deletetask/<taskID>', methods=['GET'])
