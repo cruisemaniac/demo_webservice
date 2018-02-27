@@ -78,10 +78,9 @@ def do_updatetask():
 @app.route('/deletetask/<taskID>', methods=['GET'])
 def deleteTask(taskID):
 	
-	# Iterate and remove the item acording to the id
-	for theTask in allTasks:
-		if int(taskID) == int(theTask['id']):
-			allTasks.remove(theTask)
+	delete_task = Task.query.filter_by(idTask=taskID).first()
+	db.session.delete(delete_task)
+	db.session.commit()
 
 	# redirect to homepage
 	return redirect('/', 302)
