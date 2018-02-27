@@ -83,10 +83,9 @@ def deleteTask(taskID):
 @app.route('/complete/<taskID>')
 def complete(taskID):
 
-	# Iterate to find that requested task
-	for theTask in allTasks:
-		if int(taskID) == int(theTask['id']):
-			theTask['complete'] = True
+	complete_task = Task.query.filter_by(idTask = taskID).first()
+	complete_task.status = 'complete'
+	db.session.commit()
 
 	# Redirect to the homepage
 	return redirect('/', 302)
@@ -94,10 +93,9 @@ def complete(taskID):
 @app.route('/uncomplete/<taskID>')
 def uncomplete(taskID):
 
-	# Iterate to find that requested task
-	for theTask in allTasks:
-		if int(taskID) == int(theTask['id']):
-			theTask['complete'] = False
+	uncomplete_task = Task.query.filter_by(idTask = taskID).first()
+	uncomplete_task.status = 'uncomplete'
+	db.session.commit()
 
 	# Redirect to the homepage
 	return redirect('/', 302)
