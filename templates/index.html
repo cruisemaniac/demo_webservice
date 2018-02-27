@@ -29,12 +29,12 @@
 			{{ task.task }} - 
 			</span>
 			{% if task.complete == True %}
-			<a href="/uncomplete/{{ task.id }}">Uncomplete</a> |
+			<a href="/uncomplete/{{ task.idTask }}">Uncomplete</a> |
 			{% else %}
-			<a href="/complete/{{ task.id }}">Complete</a> |
+			<a href="/complete/{{ task.idTask }}">Complete</a> |
 			{% endif %}
-			<a href="/deletetask/{{ task.id }}">Remove</a> |
-			<a href="/updatetask/{{ task.id }}">Update</a>
+			<a href="/deletetask/{{ task.idTask }}">Remove</a> |
+			<a href="/updatetask/{{ task.idTask }}">Update</a>
 		</li>
 	{% endfor %}
 </ul>
