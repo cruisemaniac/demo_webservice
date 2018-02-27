@@ -32,6 +32,10 @@ PS: This project was built for studying purposes only.
 - [X] Update tasks
 - [X] Check task as complete
 - [X] Check task as uncomplete
+- [X] Add a database
+- [ ] Improve form validation
+- [ ] Add user sign up
+- [ ] Add user auth
 
 # License
 
