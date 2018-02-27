@@ -17,7 +17,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 # Init SQLAlchemy
 db = SQLAlchemy(app)
 
-
 # Models
 class Task(db.Model):
 	__tablename__ = 'tasks'
@@ -39,7 +38,8 @@ def IDgenerator():
 # Home page
 @app.route('/')
 def index():
-	return render_template('index.html', t = allTasks)
+	all_tasks = Task.query.all()
+	return render_template('index.html', t = all_tasks)
 
 # Create a new task
 @app.route('/task', methods=['POST'])
