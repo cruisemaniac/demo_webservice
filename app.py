@@ -1,6 +1,7 @@
 # app.py
 
 # Import packages / modules
+import os
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy 
 from datetime import datetime
@@ -11,7 +12,7 @@ app = Flask(__name__)
 
 # Configs
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:tosh@localhost/todo-py'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('CONN_STRING')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 # Init SQLAlchemy
@@ -101,4 +102,4 @@ def uncomplete(taskID):
 	return redirect('/', 302)
 
 if __name__ == '__main__':
-	app.run(debug=True)
+	app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('APP_PORT')))
